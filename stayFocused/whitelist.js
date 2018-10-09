@@ -1,18 +1,31 @@
+const bs = browser.storage;
+const ls = bs.local;
 const formWhite = document.getElementById("formWhite");
 const whitelisted = document.getElementById("whitelisted");
 const whiteRemove = document.getElementById("whiteRemove");
+const timeSpent = document.getElementById("timeSpent");
 let existing;
+let siteTimer;
 
-browser.storage.local.get().then(function(res) {
+ls.get().then(function(res) {
     existing = res['whitelist'] || [];
+    siteTimer = res['site_timer'] || 0;
 
     updateList();
+});
+
+bs.onChanged.addListener(function(changes, area) {
+    const items = Object.keys(changes);
+
+    if (items.includes('site_timer')) {
+        timeSpent.innerHTML = new Date(1000 * changes['site_timer'].newValue).toISOString().substr(11, 8);
+    }
 });
 
 formWhite.addEventListener("submit", function () {
     existing.push(document.getElementById("whitelist").value.toLowerCase());
 
-    browser.storage.local.set({whitelist: existing});
+    ls.set({whitelist: existing});
 }, false);
 
 whiteRemove.addEventListener("click", function() {
@@ -26,7 +39,7 @@ whiteRemove.addEventListener("click", function() {
 
     existing = existing.filter(x => !result.includes(x));
 
-    browser.storage.local.set({whitelist: existing});
+    ls.set({whitelist: existing});
 
     updateList();
 }, false);

@@ -18,7 +18,7 @@ localStorage.get().then((res) => {
 });
 
 setInterval(() => {
-    if (time > 5) {
+    if (time > 3600) {
         window.location.href = 'about:blank';
     }
 }, 5000);
