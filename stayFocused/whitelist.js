@@ -4,6 +4,7 @@ const formWhite = document.getElementById("formWhite");
 const whitelisted = document.getElementById("whitelisted");
 const whiteRemove = document.getElementById("whiteRemove");
 const timeSpent = document.getElementById("timeSpent");
+const timeForm = document.getElementById("timeForm");
 let existing;
 
 ls.get().then(function(res) {
@@ -18,6 +19,10 @@ bs.onChanged.addListener(function(changes, area) {
         timeSpent.innerHTML = new Date(1000 * changes['site_timer'].newValue).toISOString().substr(11, 8);
     }
 });
+
+timeForm.addEventListener("submit", function() {
+    ls.set({maxTime: parseInt(document.getElementById("maxTime").value)});
+}, false);
 
 formWhite.addEventListener("submit", function () {
     existing.push(document.getElementById("whitelist").value.toLowerCase());

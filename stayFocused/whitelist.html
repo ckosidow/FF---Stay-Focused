@@ -5,7 +5,6 @@
         <title>Stay Focused | Whitelist</title>
     </head>
     <body>
-        <div id="whoop"></div>
         <form id="formWhite">
             <div style="display:inline-block">
                 <span style="vertical-align: top">Whitelisted:</span>
@@ -20,7 +19,10 @@
 
         <button id="whiteRemove">Remove</button>
 
-        <span id="timeSpent">00:00:00</span>
+        <form id="timeForm">
+            <span id="timeSpent">00:00:00</span> / <input type="text" id="maxTime" placeholder="00:15:00">
+            <input type="submit">
+        </form>
 
         <script src="whitelist.js"></script>
     </body>
