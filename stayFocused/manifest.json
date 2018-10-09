@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "stayFocused",
+    "version": "1.0",
+    "description": "Disables web pages after a certain time limit",
+    "permissions": ["storage"],
+    "browser_action": {
+        "default_title": "stayFocused",
+        "default_popup": "whitelist.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.mozilla.org/*"
+            ],
+            "js": [
+                "stayFocused.js"
+            ]
+        }
+    ]
+}
