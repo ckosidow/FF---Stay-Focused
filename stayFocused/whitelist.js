@@ -5,19 +5,16 @@ const whitelisted = document.getElementById("whitelisted");
 const whiteRemove = document.getElementById("whiteRemove");
 const timeSpent = document.getElementById("timeSpent");
 let existing;
-let siteTimer;
 
 ls.get().then(function(res) {
     existing = res['whitelist'] || [];
-    siteTimer = res['site_timer'] || 0;
+    timeSpent.innerHTML = new Date(1000 * res['site_timer']).toISOString().substr(11, 8);
 
     updateList();
 });
 
 bs.onChanged.addListener(function(changes, area) {
-    const items = Object.keys(changes);
-
-    if (items.includes('site_timer')) {
+    if (Object.keys(changes).includes('site_timer')) {
         timeSpent.innerHTML = new Date(1000 * changes['site_timer'].newValue).toISOString().substr(11, 8);
     }
 });
