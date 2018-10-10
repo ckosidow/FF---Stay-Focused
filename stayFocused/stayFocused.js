@@ -10,47 +10,52 @@ ls.get().then((res) => {
     whitelist = res['whitelist'] || [];
     maxTime = res['maxTime'] || 900;
 
-    if (whitelist.includes(window.location.hostname)) {
-        clearInterval(intervalId);
-        intervalId = setInterval(countTime, 1000);
-    }
+    tryToStartTimer();
 }, () => {
     alert('Couldn\'t find local storage');
 });
 
 bs.onChanged.addListener(function(changes, area) {
-    if (Object.keys(changes).includes('whitelist')) {
-        whitelist = changes['whitelist'].newValue;
+    for (const change of Object.keys(changes)) {
+        switch (change) {
+            case 'whitelist':
+                whitelist = changes[change].newValue;
 
-        if (whitelist.includes(window.location.hostname)) {
-            clearInterval(intervalId);
-            intervalId = setInterval(countTime, 1000);
-        } else {
-            clearInterval(intervalId);
-            intervalId = 0;
+                tryToStartTimer();
+
+                break;
+            case 'maxTime':
+                maxTime = changes[change].newValue;
+
+                break;
+            case 'site_timer':
+                time = change[change].newValue;
+
+                break;
+            default:
+                break;
         }
-    }
-
-    if (Object.keys(changes).includes('maxTime')) {
-        maxTime = changes['maxTime'].newValue;
     }
 });
 
-function countTime() {
-    time++;
+document.addEventListener("visibilitychange", function () {
+    tryToStartTimer();
+});
 
-    ls.set({site_timer: time});
+function tryToStartTimer() {
+    clearInterval(intervalId);
 
-    if (time > maxTime) {
-        window.location.href = 'about:blank';
+    if (document.visibilityState === 'visible' && whitelist.includes(window.location.hostname)) {
+        intervalId = setInterval(countTime, 1000);
     }
 }
 
-document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === 'hidden') {
-        clearInterval(intervalId);
-        intervalId = 0;
-    } else if (!intervalId && whitelist.includes(window.location.hostname)) {
-        intervalId = setInterval(countTime, 1000);
+function countTime() {
+    if (time > maxTime) {
+        window.location.href = 'about:blank';
+    } else {
+        time++;
+
+        ls.set({site_timer: time});
     }
-});
+}

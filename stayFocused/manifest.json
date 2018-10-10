@@ -8,6 +8,9 @@
         "default_title": "stayFocused",
         "default_popup": "whitelist.html"
     },
+    "background": {
+        "scripts": ["background.js"]
+    },
     "content_scripts": [
         {
             "matches": [
