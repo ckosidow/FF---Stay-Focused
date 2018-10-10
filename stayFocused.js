@@ -5,23 +5,13 @@ let intervalId = 0;
 let time;
 let whitelist;
 
-ls.get().then((res) => {
-    time = res['site_timer'] || 0;
-    whitelist = res['whitelist'] || [];
-    maxTime = res['maxTime'] || 900;
-
-    tryToStartTimer();
-}, () => {
-    alert('Couldn\'t find local storage');
-});
+updateTimer();
 
 bs.onChanged.addListener(function(changes, area) {
     for (const change of Object.keys(changes)) {
         switch (change) {
             case 'whitelist':
-                whitelist = changes[change].newValue;
-
-                tryToStartTimer();
+                updateTimer();
 
                 break;
             case 'maxTime':
@@ -39,19 +29,28 @@ bs.onChanged.addListener(function(changes, area) {
 });
 
 document.addEventListener("visibilitychange", function () {
-    tryToStartTimer();
+    updateTimer();
 });
 
-function tryToStartTimer() {
-    clearInterval(intervalId);
+function updateTimer() {
+    // We need to make sure all our values are up-to-date
+    ls.get().then((res) => {
+        time = res['site_timer'] || 0;
+        whitelist = res['whitelist'] || [];
+        maxTime = res['maxTime'] || 900;
 
-    if (document.visibilityState === 'visible' && whitelist.includes(window.location.hostname)) {
-        intervalId = setInterval(countTime, 1000);
-    }
+        clearInterval(intervalId);
+
+        if (document.visibilityState === 'visible' && whitelist.includes(window.location.hostname)) {
+            intervalId = setInterval(countTime, 1000);
+        }
+    }, () => {
+        alert('Couldn\'t find local storage');
+    });
 }
 
 function countTime() {
-    if (time > maxTime) {
+    if (time >= maxTime) {
         window.location.href = 'about:blank';
     } else {
         time++;
