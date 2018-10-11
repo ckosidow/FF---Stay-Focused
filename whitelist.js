@@ -5,14 +5,16 @@ const whitelisted = document.getElementById("whitelisted");
 const removeSite = document.getElementById("removeSite");
 const timeSpent = document.getElementById("timeSpent");
 const timeForm = document.getElementById("timeForm");
+const maxTimeInput = document.getElementById("maxTime");
 let existing;
 let maxTime;
 
 ls.get().then(function(res) {
     let siteTimer = res['site_timer'] || 0;
     maxTime = res['maxTime'] || 900;
-    existing = res['whitelist'] || [];
+    existing = res['whitelist'] || new Set();
     timeSpent.innerHTML = new Date(1000 * siteTimer).toISOString().substr(11, 8);
+    maxTimeInput.placeholder = new Date(1000 * maxTime).toISOString().substr(11, 8);
 
     if (siteTimer >= maxTime) {
         removeSite.parentNode.removeChild(removeSite);
@@ -29,27 +31,24 @@ bs.onChanged.addListener(function(changes, area) {
 });
 
 timeForm.addEventListener("submit", function() {
-    maxTime = parseInt(document.getElementById("maxTime").value);
+    maxTime = parseInt(maxTimeInput.value);
+    maxTimeInput.placeholder = new Date(1000 * maxTime).toISOString().substr(11, 8);
 
     ls.set({maxTime: maxTime});
 }, false);
 
 formWhite.addEventListener("submit", function () {
-    existing.push(document.getElementById("whitelist").value.toLowerCase());
+    existing.add(document.getElementById("whitelist").value.toLowerCase());
 
     ls.set({whitelist: existing});
 }, false);
 
 removeSite.addEventListener("click", function() {
-    let result = [];
-
     for (const opt of whitelisted.options) {
         if (opt.selected) {
-            result.push(opt.value || opt.text);
+            existing.delete(opt.value || opt.text);
         }
     }
-
-    existing = existing.filter(x => !result.includes(x));
 
     ls.set({whitelist: existing});
 

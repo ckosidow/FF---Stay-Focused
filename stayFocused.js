@@ -36,12 +36,12 @@ function updateTimer() {
     // We need to make sure all our values are up-to-date
     ls.get().then((res) => {
         time = res['site_timer'] || 0;
-        whitelist = res['whitelist'] || [];
+        whitelist = res['whitelist'] || new Set();
         maxTime = res['maxTime'] || 900;
 
         clearInterval(intervalId);
 
-        if (document.visibilityState === 'visible' && whitelist.includes(window.location.hostname)) {
+        if (document.visibilityState === 'visible' && whitelist.has(window.location.hostname)) {
             intervalId = setInterval(countTime, 1000);
         }
     }, () => {

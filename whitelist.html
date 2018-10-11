@@ -4,24 +4,25 @@
         <meta charset="UTF-8">
         <title>Stay Focused | Whitelist</title>
     </head>
-    <body>
-        <form id="formWhite">
-            <div style="display:inline-block">
-                <span style="vertical-align: top">Whitelisted:</span>
-                <select multiple id="whitelisted"></select>
-            </div>
+    <body style="width:200px;">
+        <form>
+            <span style="display:block;margin:auto;width:40%;">Whitelisted</span>
             <br/>
-            <div style="display:inline-block">
-                <input type="text" id="whitelist" required placeholder="whitelist: e.g. example.test">
+            <div>
+                <select multiple id="whitelisted" style="width:100%;"></select>
+            </div>
+            <button id="removeSite" style="display:inline-block;float:right;margin-top:10px;">Remove</button>
+        </form>
+
+        <form id="formWhite">
+            <div style="display:inline-block;padding-top:10px;">
+                <input type="text" id="whitelist" required placeholder="www.example.com">
                 <input type="submit" id="subWhite" value="Add">
             </div>
         </form>
 
-        <button id="removeSite">Remove</button>
-
-        <form id="timeForm">
-            <span id="timeSpent">00:00:00</span> / <input type="text" id="maxTime" placeholder="00:15:00">
-            <input type="submit">
+        <form id="timeForm" style="padding-top:10px">
+            <span id="timeSpent">00:00:00</span> / <input type="text" id="maxTime" placeholder="00:15:00" required style="width:52px;">
         </form>
 
         <script src="whitelist.js"></script>
