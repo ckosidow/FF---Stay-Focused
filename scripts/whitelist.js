@@ -6,6 +6,7 @@ const removeSite = document.getElementById("removeSite");
 const timeSpent = document.getElementById("timeSpent");
 const timeForm = document.getElementById("timeForm");
 const maxTimeInput = document.getElementById("maxTime");
+const addSite = document.getElementById("addSite");
 let existing;
 let maxTime;
 
@@ -19,6 +20,7 @@ ls.get().then(function(res) {
     if (siteTimer >= maxTime) {
         removeSite.parentNode.removeChild(removeSite);
         timeForm.parentNode.removeChild(timeForm);
+        addSite.className += " width-full";
     }
 
     updateList();

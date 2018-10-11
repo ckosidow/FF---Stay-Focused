@@ -1,0 +1,49 @@
+body {
+    width          : 185px;
+    font-family    : sans-serif;
+    padding-bottom : 30px;
+}
+
+.bottom-button {
+    font-size   : 16px;
+    font-weight : bold;
+    position    : absolute;
+    bottom      : 0;
+    width       : 50%;
+    border      : none;
+    height      : 30px;
+}
+
+.width-full {
+    width: 100%;
+}
+
+.margin-top {
+    margin-top: 10px;
+}
+
+#maxTime {
+    width : 52px;
+}
+
+#timeForm {
+    margin    : auto;
+    width     : 64%;
+    font-size : 12px;
+}
+
+#addSite {
+    left             : 0;
+    background-color : lightgreen;
+}
+
+#removeSite {
+    right            : 0;
+    background-color : lightsalmon;
+}
+
+#whitelist {
+    width:97%;
+    margin:auto;
+    display:inline-block;
+}
