@@ -6,7 +6,15 @@
     "permissions": ["storage"],
     "browser_action": {
         "default_title": "stayFocused",
-        "default_popup": "whitelist.html"
+        "default_popup": "whitelist.html",
+        "default_icon": {
+            "16": "icon.png",
+            "32": "icon.png"
+        }
+    },
+    "icons": {
+        "48": "icon.png",
+        "96": "icon.png"
     },
     "background": {
         "scripts": ["background.js"]
