@@ -8,22 +8,22 @@
         "default_title": "bLocket",
         "default_popup": "pages/whitelist.html",
         "default_icon": {
-            "16": "icons/icon-grey.png",
-            "32": "icons/icon-grey.png"
+            "16": "icons/icon-grey-16.png",
+            "32": "icons/icon-grey-32.png"
         },
         "theme_icons": [{
-            "light": "icons/icon-light.png",
-            "dark": "icons/icon-grey.png",
+            "light": "icons/icon-light-16.png",
+            "dark": "icons/icon-grey-16.png",
             "size": 16
         }, {
-            "light": "icons/icon-light.png",
-            "dark": "icons/icon-grey.png",
+            "light": "icons/icon-light-32.png",
+            "dark": "icons/icon-grey-32.png",
             "size": 32
         }]
     },
     "icons": {
-        "48": "icons/icon-grey.png",
-        "96": "icons/icon-grey.png"
+        "48": "icons/icon-grey-48.png",
+        "96": "icons/icon-grey-48.png"
     },
     "background": {
         "scripts": ["scripts/background.js"]
