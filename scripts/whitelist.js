@@ -61,6 +61,10 @@ function updateList() {
     whitelisted.innerHTML = '';
 
     for (const entry of existing) {
-        whitelisted.innerHTML += '<option>' + entry + '</option>'
+        whitelisted.innerHTML += '<option>' + blEncodeHTML(entry) + '</option>'
     }
+}
+
+function blEncodeHTML(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 }
