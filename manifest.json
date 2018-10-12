@@ -1,11 +1,11 @@
 {
     "manifest_version": 2,
-    "name": "stayFocused",
+    "name": "bLocket",
     "version": "1.0",
     "description": "Disables web pages after a certain time limit",
     "permissions": ["storage"],
     "browser_action": {
-        "default_title": "stayFocused",
+        "default_title": "bLocket",
         "default_popup": "pages/whitelist.html",
         "default_icon": {
             "16": "icons/icon-grey.png",
@@ -34,7 +34,7 @@
                 "<all_urls>"
             ],
             "js": [
-                "scripts/stayFocused.js"
+                "scripts/bLocket.js"
             ]
         }
     ]
