@@ -19,7 +19,7 @@ bs.onChanged.addListener(function(changes, area) {
 
                 break;
             case 'site_timer':
-                time = change[change].newValue;
+                time = changes[change].newValue;
 
                 break;
             default:
