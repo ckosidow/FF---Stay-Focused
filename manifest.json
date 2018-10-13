@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "bLocket",
-    "version": "1.1",
+    "version": "1.1.1",
     "description": "A simple productivity add-on which allows the user to set a global timer and a list of sites which should be blacklisted once the time limit has been reached.",
     "permissions": ["storage"],
     "browser_action": {

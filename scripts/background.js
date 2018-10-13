@@ -1,6 +1,6 @@
 function setForTomorrow() {
     let now = new Date();
-    let millisTill00 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds() + 10, 0) - now; // ms
+    let millisTill00 = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0) - now; // ms
     // until 00:00
     // tomorrow
 
