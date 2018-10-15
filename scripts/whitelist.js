@@ -7,8 +7,8 @@ const timeSpent = document.getElementById("timeSpent");
 const timeForm = document.getElementById("timeForm");
 const maxTimeInput = document.getElementById("maxTime");
 const addSite = document.getElementById("addSite");
-let existing;
-let maxTime;
+let existing = new Set();
+let maxTime = 900;
 
 ls.get().then(function(res) {
     let siteTimer = res['site_timer'] || 0;

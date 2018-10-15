@@ -2,8 +2,7 @@ const bs = browser.storage;
 const ls = bs.local;
 let maxTime = 900;
 let intervalId = 0;
-let time;
-let whitelist;
+let time = 0;
 
 updateTimer();
 
@@ -35,8 +34,8 @@ document.addEventListener("visibilitychange", function () {
 function updateTimer() {
     // We need to make sure all our values are up-to-date
     ls.get().then((res) => {
+        let whitelist = res['whitelist'] || new Set();
         time = res['site_timer'] || 0;
-        whitelist = res['whitelist'] || new Set();
         maxTime = res['maxTime'] || 900;
 
         clearInterval(intervalId);
