@@ -10,6 +10,18 @@ const addSite = document.getElementById("addSite");
 let existing = new Set();
 let maxTime = 900;
 
+function blEncodeHTML(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+}
+
+function updateList() {
+    whitelisted.innerHTML = '';
+
+    for (const entry of existing) {
+        whitelisted.innerHTML += '<option>' + blEncodeHTML(entry) + '</option>'
+    }
+}
+
 ls.get().then(function(res) {
     let siteTimer = res['site_timer'] || 0;
     maxTime = res['maxTime'] || 900;
@@ -40,7 +52,11 @@ timeForm.addEventListener("submit", function() {
 }, false);
 
 formWhite.addEventListener("submit", function () {
-    existing.add(document.getElementById("whitelist").value.toLowerCase());
+    let whitelist = document.getElementById("whitelist");
+    let val = whitelist.value;
+    let entry = val.toLowerCase();
+
+    existing.add(entry);
 
     ls.set({whitelist: existing});
 }, false);
@@ -56,15 +72,3 @@ removeSite.addEventListener("click", function() {
 
     updateList();
 }, false);
-
-function updateList() {
-    whitelisted.innerHTML = '';
-
-    for (const entry of existing) {
-        whitelisted.innerHTML += '<option>' + blEncodeHTML(entry) + '</option>'
-    }
-}
-
-function blEncodeHTML(s) {
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-}
