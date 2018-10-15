@@ -7,7 +7,7 @@ const timeSpent = document.getElementById("timeSpent");
 const timeForm = document.getElementById("timeForm");
 const maxTimeInput = document.getElementById("maxTime");
 const addSite = document.getElementById("addSite");
-let existing = new Set();
+let existing = [];
 let maxTime = 900;
 
 function blEncodeHTML(s) {
@@ -25,7 +25,7 @@ function updateList() {
 ls.get().then(function(res) {
     let siteTimer = res['site_timer'] || 0;
     maxTime = res['maxTime'] || 900;
-    existing = res['whitelist'] || new Set();
+    existing = res['whitelist'] || [];
     timeSpent.innerHTML = new Date(1000 * siteTimer).toISOString().substr(11, 8);
     maxTimeInput.placeholder = new Date(1000 * maxTime).toISOString().substr(11, 8);
 
@@ -52,19 +52,17 @@ timeForm.addEventListener("submit", function() {
 }, false);
 
 formWhite.addEventListener("submit", function () {
-    let whitelist = document.getElementById("whitelist");
-    let val = whitelist.value;
-    let entry = val.toLowerCase();
-
-    existing.add(entry);
+    existing.push(document.getElementById("whitelist").value.toLowerCase());
 
     ls.set({whitelist: existing});
 }, false);
 
 removeSite.addEventListener("click", function() {
+    let existing = [];
+
     for (const opt of whitelisted.options) {
-        if (opt.selected) {
-            existing.delete(opt.value || opt.text);
+        if (!opt.selected) {
+            existing.push(opt.value || opt.text);
         }
     }
 

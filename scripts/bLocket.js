@@ -34,13 +34,13 @@ document.addEventListener("visibilitychange", function () {
 function updateTimer() {
     // We need to make sure all our values are up-to-date
     ls.get().then((res) => {
-        let whitelist = res['whitelist'] || new Set();
+        let whitelist = res['whitelist'] || [];
         time = res['site_timer'] || 0;
         maxTime = res['maxTime'] || 900;
 
         clearInterval(intervalId);
 
-        if (document.visibilityState === 'visible' && whitelist.has(window.location.hostname)) {
+        if (document.visibilityState === 'visible' && whitelist.includes(window.location.hostname)) {
             intervalId = setInterval(countTime, 1000);
         }
     }, () => {
