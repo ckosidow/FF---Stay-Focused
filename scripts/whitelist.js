@@ -19,7 +19,9 @@ function updateList() {
 
     for (const entry of existing) {
         const option = document.createElement('option');
-        option.innerHTML = blEncodeHTML(entry);
+        const text = document.createTextNode(blEncodeHTML(entry));
+        option.setAttribute("value", entry);
+        option.appendChild(text);
 
         whitelisted.appendChild(option);
     }
