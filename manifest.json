@@ -26,7 +26,7 @@
         "96": "icons/icon-grey-96.png"
     },
     "background": {
-        "scripts": ["scripts/background.js"]
+        "scripts": ["scripts/background.min.js"]
     },
     "content_scripts": [
         {
