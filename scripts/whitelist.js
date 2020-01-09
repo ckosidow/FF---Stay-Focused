@@ -18,7 +18,10 @@ function updateList() {
     whitelisted.innerHTML = '';
 
     for (const entry of existing) {
-        whitelisted.innerHTML += '<option>' + blEncodeHTML(entry) + '</option>'
+        const option = document.createElement('option');
+        option.innerHTML = blEncodeHTML(entry);
+
+        whitelisted.appendChild(option);
     }
 }
 
@@ -26,7 +29,11 @@ ls.get().then(function(res) {
     let siteTimer = res['site_timer'] || 0;
     maxTime = res['maxTime'] || 900;
     existing = res['whitelist'] || [];
-    timeSpent.innerHTML = new Date(1000 * siteTimer).toISOString().substr(11, 8);
+    timeSpent.innerHTML = '';
+
+    const spent = document.createTextNode(new Date(1000 * siteTimer).toISOString().substr(11, 8));
+
+    timeSpent.appendChild(spent);
     maxTimeInput.placeholder = new Date(1000 * maxTime).toISOString().substr(11, 8);
 
     if (siteTimer >= maxTime) {
@@ -40,7 +47,11 @@ ls.get().then(function(res) {
 
 bs.onChanged.addListener(function(changes, area) {
     if (Object.keys(changes).includes('site_timer')) {
-        timeSpent.innerHTML = new Date(1000 * changes['site_timer'].newValue).toISOString().substr(11, 8);
+        timeSpent.innerHTML = '';
+
+        const spent = document.createTextNode(new Date(1000 * changes['site_timer'].newValue).toISOString().substr(11, 8));
+
+        timeSpent.appendChild(spent);
     }
 });
 
