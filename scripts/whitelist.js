@@ -45,7 +45,16 @@ bs.onChanged.addListener(function(changes, area) {
 });
 
 timeForm.addEventListener("submit", function() {
-    maxTime = parseInt(maxTimeInput.value);
+    const intervals = maxTimeInput.value.match(/[0-9]{1,}/g);
+
+    if (intervals.length === 3) {
+        maxTime = parseInt(intervals[0] * 3600) + parseInt(intervals[1] * 60) + parseInt(intervals[2]);
+    } else if (intervals.length === 2) {
+        maxTime = parseInt(intervals[0] * 60) + parseInt(intervals[1]);
+    } else {
+        maxTime = parseInt(intervals[0])
+    }
+
     maxTimeInput.placeholder = new Date(1000 * maxTime).toISOString().substr(11, 8);
 
     ls.set({maxTime: maxTime});
