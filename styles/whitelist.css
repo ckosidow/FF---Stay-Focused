@@ -1,5 +1,5 @@
 body {
-    width          : 185px;
+    width          : 195px;
     font-family    : sans-serif;
     padding-bottom : 30px;
 }
@@ -16,20 +16,21 @@ body {
 }
 
 .width-full {
-    width: 100%;
+    width : 100%;
 }
 
 .margin-top {
-    margin-top: 10px;
+    margin-top : 10px;
 }
 
 #maxTime {
-    width : 52px;
+    border : none;
+    width  : 49px;
 }
 
 #timeForm {
     margin    : auto;
-    width     : 64%;
+    width     : 61.5%;
     font-size : 12px;
 }
 
@@ -44,7 +45,7 @@ body {
 }
 
 #whitelist {
-    width:97%;
-    margin:auto;
-    display:inline-block;
+    width   : 95%;
+    margin  : auto;
+    display : inline-block;
 }
